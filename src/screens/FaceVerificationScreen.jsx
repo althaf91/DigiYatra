@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text, Button, Alert} from 'react-native';
+import {View, Text} from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -16,6 +16,7 @@ import {
   authenticateFace,
 } from '../services/faceRecognitionService';
 import { useNavigation, useRoute } from '@react-navigation/native';
+import i18n from '../services/i18n';
 
 const FaceVerificationScreen = () => {
   const cameraRef = useRef(null);
@@ -91,11 +92,11 @@ const FaceVerificationScreen = () => {
     <View>
       {!hasPermission ? (
         <Text style={{color: 'red'}}>
-          Camera permission is required to use face recognition.
+          {i18n.t('camera_permission_required')}
         </Text>
       ) : !isCameraReady ? (
         <Text style={{color: 'red'}}>
-          No front camera detected on this device.
+          {i18n.t('no_front_camera_detected')}
         </Text>
       ) : (
         <View>

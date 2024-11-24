@@ -1,0 +1,15 @@
+{
+    "welcome_message": "Welcome to the Geofencing App!",
+    "face_scan_prompt": "Please scan your face.",
+    "scan_face_button": "Scan Face",
+    "camera_permission_required": "Camera permission is required to use face recognition.",
+    "no_front_camera_detected": "No front camera detected on this device.",
+    "survey_screen": "Survey Screen",
+    "surveyTitle": "Please answer the following questions:",
+    "questions": [
+      "How satisfied are you with your experience ?",
+      "Would you recommend this place to others?",
+      "What was the best part of your visit in this place?",
+      "How can we improve ?"
+    ]
+  }

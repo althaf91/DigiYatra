@@ -13,6 +13,8 @@ import FaceVerificationScreen from './src/screens/FaceVerificationScreen';
 import { checkStoredFace } from './src/services/faceRecognitionService';
 import AuthScreen from './src/screens/AuthScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import SurveyScreen from './src/screens/SurveyScreen'
+import { loadLocale } from './src/services/localStorageService';
 
 
 const Stack = createNativeStackNavigator();
@@ -22,6 +24,8 @@ const App = () =>  {
 
   useEffect(() => {
     const initializeApp = async () => {
+      //initNotificationService();
+      loadLocale();
       const isStored = await checkStoredFace(); // Await the check
       setInitialRoute(isStored ? 'FaceVerification' : 'Auth'); // Set the correct route
     };
@@ -43,6 +47,7 @@ const App = () =>  {
         <Stack.Screen name="Auth" component={AuthScreen} />
         <Stack.Screen name="FaceVerification" component={FaceVerificationScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Survey" component={SurveyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
 

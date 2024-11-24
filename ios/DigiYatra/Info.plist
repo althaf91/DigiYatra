@@ -51,5 +51,14 @@
     <string>$(PRODUCT_NAME) Authentication with FaceID</string>
 	<key>NSCameraUsageDescription</key>
     <string>We need access to your camera for facial recognition.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+<string>We need your location to trigger geofenced surveys.</string>
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>We need your location while the app is in use.</string>
+<key>UIBackgroundModes</key>
+<array>
+  <string>location</string>
+</array>
+
 </dict>
 </plist>

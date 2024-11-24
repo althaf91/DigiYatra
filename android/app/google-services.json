@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "573614851075",
+    "project_id": "digiyatra-e5e6f",
+    "storage_bucket": "digiyatra-e5e6f.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:573614851075:android:67546f5c843a3d7249ba36",
+        "android_client_info": {
+          "package_name": "com.digiyatra"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1jRnkjyp9oeLXquWy20w7Zum10XNyVVs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

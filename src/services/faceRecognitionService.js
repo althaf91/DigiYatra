@@ -64,7 +64,6 @@ const compareFaceFeatures = (storedFace, currentFace) => {
   let totalDistance = 0;
 
 
-  console.log('check 1');
   // Compare bounding box (x, y, width, height)
   const bboxMatch = (
     Math.abs(storedFace.bounds.x - currentFace.bounds.x) < tolerance.maxBoundingBoxDifference &&
@@ -72,8 +71,6 @@ const compareFaceFeatures = (storedFace, currentFace) => {
     Math.abs(storedFace.bounds.width - currentFace.bounds.width) < tolerance.maxBoundingBoxDifference &&
     Math.abs(storedFace.bounds.height - currentFace.bounds.height) < tolerance.maxBoundingBoxDifference
   );
-
-  console.log('check 2');
 
 // Function to compute Euclidean distance between two points
 const calculateDistance = (point1, point2) => {
@@ -97,8 +94,6 @@ const calculateDistance = (point1, point2) => {
     // Calculate the Euclidean distance between corresponding landmarks
     totalDistance += calculateDistance(detectedPoint, storedPoint);
   }
-  console.log('check 3');
-
   // Compare probabilities (eye open, smiling, etc.)
   const eyeOpenMatch = (
     Math.abs(storedFace.leftEyeOpenProbability - currentFace.leftEyeOpenProbability) < tolerance.maxEyeOpennessDifference &&
@@ -106,17 +101,12 @@ const calculateDistance = (point1, point2) => {
   );
   const smilingMatch = Math.abs(storedFace.smilingProbability - currentFace.smilingProbability) < tolerance.maxSmilingDifference;
 
-  console.log('check 4');
-
   // Compare angles (pitch, yaw, roll)
   const angleMatch = (
     Math.abs(storedFace.pitchAngle - currentFace.pitchAngle) < tolerance.maxAngleDifference &&
     Math.abs(storedFace.rollAngle - currentFace.rollAngle) < tolerance.maxAngleDifference &&
     Math.abs(storedFace.yawAngle - currentFace.yawAngle) < tolerance.maxAngleDifference
   );
-
-  console.log('check 5');
-
   // Return true if all checks are within tolerance
   return bboxMatch && totalDistance < tolerance.maxLandmarkDistance && eyeOpenMatch && smilingMatch && angleMatch;
 };
