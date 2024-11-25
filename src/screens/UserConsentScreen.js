@@ -1,43 +1,16 @@
 // ConsentScreen.js
 import React, { useEffect } from 'react';
 import { View, Text, Button, Alert, StyleSheet } from 'react-native';
-import useVoiceRecognition from '../hooks/useVoiceRecognition';
-import { useLanguage } from '../services/LanguageProvider';
+//import useVoiceRecognition from '../hooks/useVoiceRecognition';
+//import { useLanguage } from '../services/LanguageProvider';
 
 const UserConsentScreen = () => {
-  const { recognizedText, isListening, startListening, stopListening } = useVoiceRecognition();
-  const { language, switchLanguage, i18n } = useLanguage();
-
-
-  useEffect(() => {
-    if (recognizedText) {
-      handleVoiceCommand(recognizedText);
-    }
-  }, [recognizedText]);
-
-  const handleVoiceCommand = (command) => {
-    const lowerCommand = command.toLowerCase();
-    if (lowerCommand.includes('yes')) {
-      Alert.alert('Consent Granted', 'You have granted consent.');
-      // Handle consent granted logic here
-    } else if (lowerCommand.includes('no')) {
-      Alert.alert('Consent Denied', 'You have denied consent.');
-      // Handle consent denied logic here 
-    } else {
-      Alert.alert('Command not recognized', 'Please say "Yes" or "No".');
-    }
-  };
+  //const { recognizedText, isListening, startListening, stopListening } = useVoiceRecognition();
+  //const { language, switchLanguage, i18n } = useLanguage();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.questionText}>Do you consent to the terms?</Text>
-      <Button
-        title={isListening ? 'Listening...' : 'Start Voice Command'}
-        onPress={startListening}
-        color="#6200EE"
-      />
-      {isListening && <Text style={styles.listeningText}>Listening...</Text>}
-      <Text style={styles.recognizedText}>Heard: {recognizedText}</Text>
+      <Text style={styles.recognizedText}>Heard:</Text>
     </View>
   );
 };
