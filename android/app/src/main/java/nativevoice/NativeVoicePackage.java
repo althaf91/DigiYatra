@@ -14,7 +14,7 @@ import java.util.Map;
 public class NativeVoicePackage extends TurboReactPackage {
 
     @Override
-    public NativeModule getModule(String name, ReactApplicationContext reactContext) {
+    public NativeModule getModule(String name, @NonNull ReactApplicationContext reactContext) {
         if (name.equals(NativeVoiceModule.NAME)) {
             return new NativeVoiceModule(reactContext);
         } else {

@@ -1,9 +1,11 @@
 import { View, Text, TextInput,Button, ScrollView, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
 import { useLanguage } from '../services/LanguageProvider';
+import { useNavigation } from '@react-navigation/native';
 
 const SurveyScreen = () => {
   const { language, switchLanguage, i18n } = useLanguage();
+  const navigation = useNavigation();
 
 
     // Get questions based on user's selected language (using i18n)
@@ -21,9 +23,7 @@ const SurveyScreen = () => {
 
   // Handle submission of the survey
   const handleSubmit = () => {
-    console.log('Survey Answers:', answers);
-    // Submit answers to a server or store them locally
-    // For now, just log them
+    navigation.goBack()
   };
 
   return (

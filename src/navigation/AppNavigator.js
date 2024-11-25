@@ -14,14 +14,14 @@ import {checkStoredFace} from '../services/faceRecognitionService';
 import AuthScreen from '../screens/AuthScreen';
 import HomeScreen from '../screens/HomeScreen';
 import SurveyScreen from '../screens/SurveyScreen';
-import { useLanguage } from '../services/LanguageProvider';
+import {useLanguage} from '../services/LanguageProvider';
 import UserConsentScreen from '../screens/UserConsentScreen';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   const [initialRoute, setInitialRoute] = useState(null);
-  const { loading } = useLanguage();
+  const {loading} = useLanguage();
 
   useEffect(() => {
     const initializeApp = async () => {
@@ -33,7 +33,7 @@ const AppNavigator = () => {
   }, []);
 
   // Show loading spinner until initialRoute is set
-  if (!initialRoute && loading) {
+  if (!initialRoute && !loading) {
     return (
       <View style={styles.loaderContainer}>
         <ActivityIndicator size="large" color="#0000ff" />
@@ -42,18 +42,27 @@ const AppNavigator = () => {
   }
 
   return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName={initialRoute}>
-          <Stack.Screen name="Auth" component={AuthScreen} />
-          <Stack.Screen
-            name="FaceVerification"
-            component={FaceVerificationScreen}
-          />
-          <Stack.Screen name="Home" component={HomeScreen} />
-          <Stack.Screen name="Survey" component={SurveyScreen} />
-          <Stack.Screen name="UserConsent" component={UserConsentScreen} />
-        </Stack.Navigator>
-      </NavigationContainer>
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName={initialRoute}
+        screenOptions={{
+          // Apply custom transition using Reanimated
+          cardStyleInterpolator: ({current}) => ({
+            cardStyle: {
+              opacity: current.progress,
+            },
+          }),
+        }}>
+        <Stack.Screen name="Auth" component={AuthScreen} />
+        <Stack.Screen
+          name="FaceVerification"
+          component={FaceVerificationScreen}
+        />
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Survey" component={SurveyScreen} />
+        <Stack.Screen name="UserConsent" component={UserConsentScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
