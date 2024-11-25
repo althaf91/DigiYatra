@@ -21,8 +21,8 @@ const handleSwitchLanguage = () => {
   useEffect(() => {
     const initSetup = async() => {
         // You can await here
-        const subscribeGeoFence = await initGeofencing();
-        const subscribeNotification = await initNotificationService(navigation);
+        await initGeofencing();
+        await initNotificationService(navigation);
         // ...
       }
       initSetup();
