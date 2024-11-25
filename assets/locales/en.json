@@ -1,5 +1,7 @@
 {
     "welcome_message": "Welcome to the Geofencing App!",
+    "switch_to": "Switch to Hindi",
+    "go_to_consent_screen": "Go to Consent Screen",
     "face_scan_prompt": "Please scan your face.",
     "scan_face_button": "Scan Face",
     "camera_permission_required": "Camera permission is required to use face recognition.",
@@ -11,5 +13,7 @@
       "Would you recommend this place to others?",
       "What was the best part of your visit in this place?",
       "How can we improve ?"
-    ]
+    ],
+    "inputPlaceholder":"Enter your answer",
+    "submit_survey": "Submit Survey"
   }

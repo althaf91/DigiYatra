@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text,StyleSheet} from 'react-native';
 import {
   Camera,
   useCameraDevice,
@@ -16,12 +16,13 @@ import {
   authenticateFace,
 } from '../services/faceRecognitionService';
 import { useNavigation, useRoute } from '@react-navigation/native';
-import i18n from '../services/i18n';
+import { useLanguage } from '../services/LanguageProvider';
 
 const FaceVerificationScreen = () => {
   const cameraRef = useRef(null);
   const navigation = useNavigation();
   const { params } = useRoute();
+  const { language, switchLanguage, i18n } = useLanguage();
   const isEnrollment = params?.isEnrollment;
   const device = useCameraDevice('front');
 
@@ -55,8 +56,6 @@ const FaceVerificationScreen = () => {
     // Check if the device has a front camera
     if (device) {
       setIsCameraReady(true);
-    } else {
-      setError('No front camera available on this device.');
     }
   }, [device]);
 
@@ -89,20 +88,20 @@ const FaceVerificationScreen = () => {
   );
 
   return (
-    <View>
+    <View style={styles.container}>
       {!hasPermission ? (
-        <Text style={{color: 'red'}}>
+        <Text style={styles.errorText}>
           {i18n.t('camera_permission_required')}
         </Text>
       ) : !isCameraReady ? (
-        <Text style={{color: 'red'}}>
+        <Text style={styles.errorText}>
           {i18n.t('no_front_camera_detected')}
         </Text>
       ) : (
-        <View>
+        <View style={styles.cameraContainer}>
           <Camera
             ref={cameraRef}
-            style={{width: '100%', height: 400}}
+            style={styles.camera}
             device={device}
             isActive={isProcessing}
             frameProcessor={isProcessing ? frameProcessor : undefined}
@@ -110,9 +109,38 @@ const FaceVerificationScreen = () => {
           />
         </View>
       )}
-      {error && <Text style={{color: 'red'}}>{error}</Text>}
+      {error && <Text style={styles.errorText}>{error}</Text>}
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F0F0F0',
+    padding: 20,
+  },
+  errorText: {
+    color: 'red',
+    fontSize: 18,
+    textAlign: 'center',
+    marginBottom: 20,
+  },
+  cameraContainer: {
+    width: '100%',
+    height: 400,
+    borderRadius: 10,
+    overflow: 'hidden',
+    backgroundColor: '#000',
+  },
+  camera: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+  },
+});
+
 
 export default FaceVerificationScreen;

@@ -1,9 +1,10 @@
 import { View, Text, TextInput,Button, ScrollView, StyleSheet } from 'react-native'
 import React, { useState } from 'react'
-import i18n from '../services/i18n'
-import { useRoute } from '@react-navigation/native';
+import { useLanguage } from '../services/LanguageProvider';
 
 const SurveyScreen = () => {
+  const { language, switchLanguage, i18n } = useLanguage();
+
 
     // Get questions based on user's selected language (using i18n)
   const questions = i18n.t('questions');
@@ -39,7 +40,7 @@ const SurveyScreen = () => {
           />
         </View>
       ))}
-      <Button title="Submit Survey" onPress={handleSubmit} />
+      <Button title={i18n.t('submit_survey')} onPress={handleSubmit} color="#6200EE" />
     </ScrollView>
   )
 }
