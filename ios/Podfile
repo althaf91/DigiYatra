@@ -14,9 +14,21 @@ if linkage != nil
   use_frameworks! :linkage => linkage.to_sym
 end
 
+use_modular_headers!
+
 target 'DigiYatra' do
   config = use_native_modules!
 
+  pod 'Firebase/Core'
+  pod 'Firebase/Auth'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Firestore'
+  pod 'Firebase/Messaging'
+  pod 'GTMSessionFetcher'
+  pod 'GoogleDataTransport' # For GDTCORTransport
+  pod 'GoogleUtilities' # For GULLogBasic, GULUserDefaults, etc.
+  pod 'gRPC-Core'
+  pod 'BoringSSL-GRPC'
   use_react_native!(
     :path => config[:reactNativePath],
     # An absolute path to your application root.
@@ -27,6 +39,7 @@ target 'DigiYatra' do
     inherit! :complete
     # Pods for testing
   end
+  
 
   post_install do |installer|
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
@@ -36,5 +49,16 @@ target 'DigiYatra' do
       :mac_catalyst_enabled => false,
       # :ccache_enabled => true
     )
+    installer.pods_project.targets.each do |target|
+      if target.name.include?('gRPC-Core') or target.name.include?('BoringSSL-GRPC')  or target.name.include?('gRPC-C++')
+        target.build_configurations.each do |config|
+          config.build_settings['CLANG_CXX_LANGUAGE_STANDARD'] = 'c++14'
+          config.build_settings['CLANG_CXX_LIBRARY'] = 'libc++'
+          if config.name == 'Debug' || config.name == 'Release'
+            config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'arm64'
+          end
+        end
+      end
+    end
   end
 end

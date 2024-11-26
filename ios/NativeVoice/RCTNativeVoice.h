@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <NativeVoiceSpec/NativeVoiceSpec.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface RCTNativeVoice : NSObject
+@interface RCTNativeVoice : NSObject <NativeVoiceSpec>
 
 @end
 
