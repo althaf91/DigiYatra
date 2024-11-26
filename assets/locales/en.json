@@ -18,5 +18,7 @@
   "submit_survey": "Submit Survey",
   "consent": "Do you consent to the terms?",
   "listening": "Listening...",
-  "start_voice_command": "Start Voice Command"
+  "start_voice_command": "Start Voice Command",
+  "enterAnswers": "Enter Answers",
+  "pleaseInputAllAnswers": "Please input all answers"
 }

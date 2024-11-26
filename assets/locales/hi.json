@@ -18,5 +18,7 @@
   "submit_survey": "सर्वे सबमिट करें",
   "consent": "क्या आप शर्तों से सहमत हैं?",
   "listening": "सुन रहे हैं...",
-  "start_voice_command": "वॉयस कमांड शुरू करें"
+  "start_voice_command": "वॉयस कमांड शुरू करें",
+  "enterAnswers": "उत्तर दर्ज करें",
+  "pleaseInputAllAnswers": "कृपया सभी उत्तर दर्ज करें"
 }

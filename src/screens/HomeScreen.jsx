@@ -45,13 +45,13 @@ const HomeScreen = () => {
           color="#6200EE"
         />
       </Animated.View>
-      <Animated.View style={[styles.buttonContainer, { transform: [{ translateY: slideIn }] }]}>
+      <View style={styles.buttonContainer}>
         <Button
           title={i18n.t('go_to_consent_screen')}
           onPress={navigateToConsent}
           color="#6200EE"
         />
-      </Animated.View>
+      </View>
     </View>
   );
 };

@@ -1,7 +1,10 @@
 // useVoiceRecognition.js
 import { useState, useEffect } from 'react';
-import { DeviceEventEmitter, PermissionsAndroid, Platform } from 'react-native';
+import { DeviceEventEmitter, NativeEventEmitter, PermissionsAndroid, Platform } from 'react-native';
 import Voice from '../../specs/NativeVoice'
+
+
+const nativeVoiceEmitter = new NativeEventEmitter(Voice);
 
 
 const useVoiceRecognition = () => {
@@ -54,18 +57,21 @@ const useVoiceRecognition = () => {
   };
 
   useEffect(() => {
-    DeviceEventEmitter.addListener('onSpeechResults', (event) => {
-      console.log('Speech Recognition Results:', event);
-      // Handle the results here, such as displaying them in the UI
+    const onSpeechResults = nativeVoiceEmitter.addListener('onSpeechResults', (event) => {
+      setRecognizedText(event.recognizedText);
     });
-    
-    // Listen for speech recognition errors
-    DeviceEventEmitter.addListener('onSpeechError', (errorEvent) => {
-      console.error('Speech Recognition Error:', errorEvent);
-      // Handle the error here, such as showing an error message
+    const onPartialResults = nativeVoiceEmitter.addListener('onSpeechPartialResults', (event) => {
+      setRecognizedText(event.partialText);
+    });
+
+    const onSpeechError = nativeVoiceEmitter.addListener('onSpeechError', (event) => {
+      console.error('Speech Recognition Error:', event.error);
     });
 
     return () => {
+      onSpeechResults.remove();
+      onPartialResults.remove();
+      onSpeechError.remove();
       Voice.destroySpeech().then(Voice.removeListeners);
     };
   }, []);
